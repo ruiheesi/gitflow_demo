@@ -1,0 +1,20 @@
+name: Routine Push Check
+run-name: ${{ github.actor }} is checking push to "${{ github.ref_name }}"  branch
+on:
+  push:
+    branches:
+      - '*'
+      - '!dev'
+      - '!main'
+jobs:
+  Routine_Check_for_Commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: test_gitflow_r_repo
+        uses: fnlcr-bids-sdsi/gitflow-R@v0.0.1
+        with:
+          action: "commit"
+          docker_image: "ruihe864/ccbr-github-playground:latest"
+          git_token: ${{secrets.GIT_TOKEN}}
+          
